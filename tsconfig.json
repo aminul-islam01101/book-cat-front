@@ -19,13 +19,14 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "types": ["node"],
+        // "types": ["node"],
         "paths": {
             "@/*": ["./src/*"],
+            "features/*": ["./src/redux/features/*"],
           
 
         }
     },
-    "include": ["src"],
+    "include": ["src", "image.d.ts", "tailwind.config.js", "postcss.config.js"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

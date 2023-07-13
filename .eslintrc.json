@@ -2,6 +2,7 @@
     "root": true,
     "env": { "browser": true, "es2021": true, "es6": true, "node": true },
     "extends": [
+        "react-app",
         "eslint:recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:react/recommended",
@@ -22,7 +23,7 @@
     "plugins": [
         "@typescript-eslint",
         "import",
-        "import",
+        
         "react-hooks",
         "react-refresh",
         "prettier"
@@ -51,6 +52,7 @@
 
         "react/state-in-constructor": 0,
         "indent": 0,
+        "react/jsx-no-target-blank": "off",
 
         "jsx-a11y/click-events-have-key-events": 0,
         "react/function-component-definition": 0,

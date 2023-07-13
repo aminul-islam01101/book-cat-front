@@ -1,10 +1,10 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import RouteCheck from '../components/RouteCheck';
-import ErrorPage from '../pages/ErrorPage';
-import Home from '../pages/Home';
-
 import Root from './Root';
+
+import RouteCheck from '@/components/RouteCheck';
+import ErrorPage from '@/pages/ErrorPage';
+import Home from '@/pages/Home';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
