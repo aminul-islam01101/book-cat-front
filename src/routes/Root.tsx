@@ -4,18 +4,20 @@ import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
 
 const Root = () => {
-    console.log('Root test');
+  console.log('Root test');
 
-    return (
-        <div className=" flex flex-col justify-between min-h-screen">
-            <div>
-                <Navbar />
-                <Outlet />
-            </div>
-
-            <Footer />
+  return (
+    <div className=" flex flex-col justify-between min-h-screen">
+      <div>
+        <Navbar />
+        <div className="container">
+          <Outlet />
         </div>
-    );
+      </div>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default Root;

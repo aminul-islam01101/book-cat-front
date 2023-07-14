@@ -2,21 +2,19 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 
 import Root from './Root';
 
-import RouteCheck from '@/components/RouteCheck';
+import Login from '@/components/auth/Login';
+import SignUp from '@/components/auth/SignUp';
 import ErrorPage from '@/pages/ErrorPage';
 import Home from '@/pages/Home';
 
 const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/route-check" element={<RouteCheck />} />
-
-            {/* <Route path="/Signup" element={<RegistrationPage />} />
-
-      <Route path="/login" element={<LoginPage />} /> */}
-        </Route>
-    )
+  createRoutesFromElements(
+    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/Sign-up" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+    </Route>
+  )
 );
 
 export default router;

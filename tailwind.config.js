@@ -3,7 +3,7 @@
 // const Form = require('@tailwindcss/forms');
 // const daisyui = require('daisyui');
 // const tailwindScrollbar = require('tailwind-scrollbar')({ nocompatible: true });
-           
+
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
@@ -45,6 +45,20 @@ module.exports = {
         300: '300px',
         1750: '1750px',
       },
+      colors: {
+      
+        warning: '#FF0000',
+        info: '#183847',
+        primary: '#3DB1C8',
+        secondary: '#257180',
+        success: '#00ff00',
+        accent: '#4e4e4c',
+        error: '#ffffff',
+        ghost: '#FF0000',
+        neutral: '#212121',
+        'base-100': '#ffffff',
+        'base-200': '#ECE8DD',
+      },
     },
   },
   daisyui: {
@@ -53,8 +67,8 @@ module.exports = {
         remoStart: {
           warning: '#FF0000',
           info: '#183847',
-          primary: '#ECE8DD',
-          secondary: '#13D1FF',
+          primary: '#3DB1C8',
+          secondary: '#257180',
           success: '#00ff00',
           accent: '#4e4e4c',
           error: '#ffffff',
@@ -80,4 +94,3 @@ module.exports = {
   },
   // plugins: [daisyui, Form, tailwindScrollbar],
 };
-                  

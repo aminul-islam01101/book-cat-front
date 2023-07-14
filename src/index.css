@@ -5,9 +5,9 @@
 /* this is commit  update */
 
 @layer components {
-  /* .container {
-    @apply m-[0_auto] w-95 max-w-[1440px] px-0 sm: w-90 md:w-85 xl:w-3/4;
-  } */
+  .container {
+    @apply m-[0_auto] w-90 max-w-[1440px] px-0  md:w-85 xl:w-3/4;
+  }
 
   .container-fluid {
     @apply w-full px-0;
@@ -18,7 +18,68 @@
   }
 
   body {
-    @apply text-black bg-white;
+    @apply dark:bg-gray-400 bg-slate-100;
+  }
+  .swiper-slide-active {
+    background: #000;
+  }
+  .select .custom-hover:hover {
+    color: #923939 !important;
+  }
+  .margin-top {
+    margin-top: 0 !important;
+  }
+  .margin-top-form {
+    margin-top: 12px !important;
+  }
+  .margin-bottom-form {
+    margin-bottom: 4px !important;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .overlay img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .color-primary {
+    @apply bg-[#37B471];
+  }
+  .color-secondary {
+    @apply bg-[#1C3B6B];
+  }
+  .color-accent {
+    @apply bg-[#b6b1b1];
+  }
+  .color-success {
+    @apply bg-[#468162];
+  }
+  .react-select__control {
+    @apply outline-none;
+  }
+
+  body {
+    overflow-y: hidden;
+  }
+  /* .large-date-picker .react-datepicker-popper {
+font-size: 20px;
+width: 200px;
+} */
+  .select2-selection__input:focus {
+    box-shadow: none;
+    outline: none;
+  }
+  .shadow-custom {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 }
 
