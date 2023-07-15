@@ -74,6 +74,7 @@
         "no-underscore-dangle": "off",
         "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
         "import/prefer-default-export": 0,
+ 
 
         "no-undef": "error",
 

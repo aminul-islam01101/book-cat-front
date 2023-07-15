@@ -1,5 +1,14 @@
 import { ZodType, z } from 'zod';
 
+export type TLoginResponse = {
+  accessToken: string;
+  firstName?: string;
+  lastName?: string;
+  profileImage?: string;
+  email: string;
+  role: string;
+};
+
 export type TLogin = {
   email: string;
   password: string;

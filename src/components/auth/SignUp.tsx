@@ -1,14 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSignUpMutation } from 'features/auth/authSlice';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import { useSignUpMutation } from '@/redux/features/auth/authApi';
 import { TSignUp, signUpSchema } from '@/types/authTypes';
+import { TError } from '@/types/globalTypes';
 
 const SignUp = () => {
-  const [signUp, { isLoading, isSuccess }] = useSignUpMutation();
-  console.log('🌼 🔥🔥 file: SignUp.tsx:11 🔥🔥 SignUp 🔥🔥 isLoading🌼', isLoading);
-
+  const [signUp, { isLoading, isSuccess, isError, error }] = useSignUpMutation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,18 +19,32 @@ const SignUp = () => {
     watch,
   } = useForm<TSignUp>({ resolver: zodResolver(signUpSchema), mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<TSignUp> = async (data): Promise<void> => {
-    const fake: TSignUp = {
-      email: 'lejiy63087@kameili.com',
-      password: '121212',
-
-      firstName: 'jack',
-      lastName: 'loft',
-      phoneNumber: '01911231231',
-      confirmPassword: '121212',
-    };
-    await signUp(fake);
+  const onSubmit: SubmitHandler<TSignUp> = async (bodyData): Promise<void> => {
+    await signUp(bodyData);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/login');
+    }
+
+    if (isError) {
+      if (error) {
+        if ('status' in error) {
+          console.log('🌼 🔥🔥 file: SignUp.tsx:40 🔥🔥 useEffect 🔥🔥 error🌼', error);
+
+          if ('error' in error) {
+            toast.error('An error occurred');
+          } else {
+            const errMsg = 'error' in error ? error.error : (error.data as TError);
+            toast.error((errMsg as TError).errorName);
+          }
+        }
+      } else {
+        // you can access all properties of `SerializedError` here
+        toast.error('An error occurred');
+      }
+    }
+  }, [isSuccess, navigate, error, isError]);
 
   const password = watch('password');
 
@@ -162,12 +179,15 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div>
+            <div className="flex justify-center mt-10 lg:mt-16">
               <button
                 type="submit"
-                className="w-full flex justify-center mt-6 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none   "
+                className="w-full flex justify-center mt-6 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none  items-center gap-4 "
               >
                 Sign Up
+                {isLoading && (
+                  <span className="w-5 h-5 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
+                )}
               </button>
             </div>
 

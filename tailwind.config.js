@@ -46,7 +46,6 @@ module.exports = {
         1750: '1750px',
       },
       colors: {
-      
         warning: '#FF0000',
         info: '#183847',
         primary: '#3DB1C8',

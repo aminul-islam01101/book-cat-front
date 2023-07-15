@@ -1,13 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLoginMutation } from 'features/auth/authSlice';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
 
+import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { TLogin, loginSchema } from '@/types/authTypes';
+import { TErrorData } from '@/types/globalTypes';
 
 const Login = () => {
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
-  console.log('🌼 🔥🔥 file: SignUp.tsx:11 🔥🔥 SignUp 🔥🔥 isLoading🌼', isLoading);
+  const [login, options] = useLoginMutation();
+  const { isLoading, isSuccess, isError, error } = options;
+  const navigate = useNavigate();
 
   const {
     register,
@@ -15,9 +20,31 @@ const Login = () => {
     formState: { errors },
   } = useForm<TLogin>({ resolver: zodResolver(loginSchema), mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<TLogin> = async (data): Promise<void> => {
-    await login(data);
+  const onSubmit: SubmitHandler<TLogin> = async (bodyData): Promise<void> => {
+    await login(bodyData);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      console.log(options.data);
+      navigate('/');
+    }
+
+    if (isError) {
+      if (error) {
+        if ('status' in error) {
+          if ('error' in error) {
+            toast.error('An error occurred');
+          } else {
+            const errMsg = error.data as TErrorData;
+            toast.error(errMsg.errorName);
+          }
+        }
+      } else {
+        // you can access all properties of `SerializedError` here
+        toast.error('An error occurred');
+      }
+    }
+  }, [isSuccess, navigate, error, isError, options.data]);
 
   return (
     <div className=" pt-40 ">
@@ -66,12 +93,15 @@ const Login = () => {
                   )}
                 </div>
               </div>
-              <div>
+              <div className="flex justify-center mt-10 lg:mt-16">
                 <button
                   type="submit"
-                  className="w-full flex justify-center mt-6 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none   "
+                  className="w-full flex justify-center mt-6 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none  items-center gap-4 "
                 >
                   Login
+                  {isLoading && (
+                    <span className="w-5 h-5 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
+                  )}
                 </button>
               </div>
               <div className="mt-6">

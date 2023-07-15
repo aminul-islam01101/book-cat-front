@@ -1,34 +1,27 @@
-import { api } from '@/redux/api/apiSlice';
-import { TLogin, TSignUp } from '@/types/authTypes';
+/* eslint-disable no-param-reassign */
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const authApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    // getProducts: builder.query({
-    //   query: () => '/products',
-    // }),
-    // singleProduct: builder.query({
-    //   query: (id) => `/product/${id}`,
-    // }),
-    signUp: builder.mutation({
-      query: (data: TSignUp) => ({
-        url: '/auth/signup',
-        method: 'POST',
-        body: data,
-      }),
-      invalidatesTags: [],
-    }),
-    login: builder.mutation({
-      query: (data: TLogin) => ({
-        url: '/auth/login',
-        method: 'POST',
-        body: data,
-      }),
-      invalidatesTags: [],
-    }),
-    // getComment: builder.query({
-    //   query: (id) => `/comment/${id}`,
-    //   providesTags: ['comments'],
-    // }),
-  }),
+import { TLoginResponse } from '@/types/authTypes';
+
+type TUserState = {
+  user: TLoginResponse | null;
+};
+
+const initialState: TUserState = { user: null };
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<TLoginResponse | null>) => {
+      state.user = action.payload;
+    },
+    logOut: () => initialState,
+  },
 });
-export const { useSignUpMutation, useLoginMutation } = authApi;
+export const { setUser, logOut } = authSlice.actions;
+
+export default authSlice.reducer;
+
+// export const selectAppUser = (state: RootState) => state.auth.user;
+// export const { user: appUser } = store.getState().auth;
