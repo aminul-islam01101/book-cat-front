@@ -12,7 +12,7 @@ export const privateApiSlice = createApi({
 });
 export const publicApiSlice = createApi({
   reducerPath: 'privateApi',
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_SERVER_URL as string }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_SERVER_URL_PRODUCTION as string }),
   tagTypes: tags,
   endpoints: () => ({}),
 });

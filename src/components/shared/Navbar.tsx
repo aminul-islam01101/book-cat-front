@@ -6,7 +6,7 @@ import { useLogOutMutation } from '@/redux/features/auth/authApi';
 import { useAppSelector } from '@/redux/hooks';
 
 const Navbar = () => {
-  const [logOut, options] = useLogOutMutation();
+  const [logOut] = useLogOutMutation();
   const { user } = useAppSelector((state) => state.auth);
 
   const handleLogOut = async () => {

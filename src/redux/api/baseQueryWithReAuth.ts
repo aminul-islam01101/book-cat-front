@@ -10,6 +10,8 @@ import { Mutex } from 'async-mutex';
 import { logOut } from '../features/auth/authSlice';
 import { RootState } from '../store';
 
+import { TGenericResponse } from '@/types/authTypes';
+
 const mutex = new Mutex();
 
 export const baseQuery = fetchBaseQuery({
@@ -17,6 +19,7 @@ export const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
     const state = getState() as RootState;
+
     const { user } = state.auth;
     if (user?.accessToken && endpoint.endsWith('P')) {
       headers.set('authorization', user?.accessToken);
@@ -32,17 +35,21 @@ export const baseQueryWithReAuth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
+
   if (result?.error?.status === 403) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
 
       try {
         const refreshResult = await baseQuery(
-          { credentials: 'include', url: 'auth/refresh' },
+          { credentials: 'include', url: '/auth/refresh' },
           api,
           extraOptions
         );
-        if (refreshResult.data) {
+
+        const refreshResponse = refreshResult.data as TGenericResponse;
+
+        if (refreshResponse?.statusCode === 200) {
           result = await baseQuery(args, api, extraOptions);
         } else {
           api.dispatch(logOut());
