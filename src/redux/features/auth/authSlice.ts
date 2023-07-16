@@ -4,16 +4,16 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TLoginResponse } from '@/types/authTypes';
 
 type TUserState = {
-  user: TLoginResponse | null;
+  user: TLoginResponse | undefined;
 };
 
-const initialState: TUserState = { user: null };
+const initialState: TUserState = { user: undefined };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<TLoginResponse | null>) => {
+    setUser: (state, action: PayloadAction<TLoginResponse | undefined>) => {
       state.user = action.payload;
     },
     logOut: () => initialState,

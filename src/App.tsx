@@ -1,15 +1,19 @@
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
+import AuthMiddleware from './helpers/AuthMiddleware';
 import router from './routes/Routes';
 
 const App = () => {
   console.log('first');
   return (
     <div>
-      <RouterProvider router={router} />
-      <Toaster />
+      <AuthMiddleware>
+        <>
+          <RouterProvider router={router} />
+          <Toaster />
+        </>
+      </AuthMiddleware>
     </div>
   );
 };

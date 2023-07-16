@@ -1,14 +1,28 @@
-import { api } from '@/redux/api/apiSlice';
-import { TLogin, TSignUp } from '@/types/authTypes';
+import { setUser } from './authSlice';
 
-const authApi = api.injectEndpoints({
+import { privateApiSlice } from '@/redux/api/apiSlice';
+import { TGenericResponse, TLogin, TLoginResponse, TSignUp } from '@/types/authTypes';
+
+export const authApi = privateApiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // getProducts: builder.query({
-    //   query: () => '/products',
-    // }),
-    // singleProduct: builder.query({
-    //   query: (id) => `/product/${id}`,
-    // }),
+    getMeP: builder.query({
+      query() {
+        return {
+          url: 'auth/me',
+          providesTags: [],
+        };
+      },
+      transformResponse: (result: TGenericResponse) => result.data,
+      async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          const response = result?.data;
+          dispatch(setUser(response as TLoginResponse));
+        } catch (error) {
+          // do nothing
+        }
+      },
+    }),
     signUp: builder.mutation({
       query: (data: TSignUp) => ({
         url: '/auth/signup',
@@ -23,12 +37,39 @@ const authApi = api.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: [],
+
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          const response = result?.data as TGenericResponse;
+          dispatch(setUser(response?.data as TLoginResponse));
+        } catch (err) {
+          // do nothing
+        }
+      },
     }),
-    // getComment: builder.query({
-    //   query: (id) => `/comment/${id}`,
-    //   providesTags: ['comments'],
-    // }),
+    logOut: builder.mutation<TGenericResponse, void>({
+      query() {
+        return {
+          url: '/auth/logout',
+          method: 'POST',
+          credentials: 'include',
+        };
+      },
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          const response = result?.data;
+
+          if (response.statusCode === 200) {
+            dispatch(setUser(undefined));
+          }
+        } catch (err) {
+          // do nothing
+        }
+      },
+    }),
   }),
 });
-export const { useSignUpMutation, useLoginMutation } = authApi;
+export const { useSignUpMutation, useLoginMutation, useGetMePQuery, useLogOutMutation } = authApi;

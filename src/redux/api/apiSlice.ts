@@ -1,17 +1,18 @@
 /* eslint-disable import/no-cycle */
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { baseQueryWithReAuth } from './baseQueryWithReAuth';
 
-export const api = createApi({
-  reducerPath: 'api',
+const tags: [string] | [] = [];
+export const privateApiSlice = createApi({
+  reducerPath: 'publicApi',
   baseQuery: baseQueryWithReAuth,
-  tagTypes: [],
+  tagTypes: tags,
   endpoints: () => ({}),
 });
-// export const api = createApi({
-//   reducerPath: 'api',
-//   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_SERVER_URL as string }),
-//   tagTypes: [],
-//   endpoints: () => ({}),
-// });
+export const publicApiSlice = createApi({
+  reducerPath: 'privateApi',
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_SERVER_URL as string }),
+  tagTypes: tags,
+  endpoints: () => ({}),
+});

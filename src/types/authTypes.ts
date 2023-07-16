@@ -8,6 +8,15 @@ export type TLoginResponse = {
   email: string;
   role: string;
 };
+export type TGenericResponse = {
+  data: object;
+  statusCode: number;
+  success: boolean;
+  message: string;
+};
+export type TRtkResponse = TGenericResponse & {
+  meta: object | undefined;
+};
 
 export type TLogin = {
   email: string;

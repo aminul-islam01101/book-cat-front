@@ -15,10 +15,10 @@ const mutex = new Mutex();
 export const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_APP_SERVER_URL as string,
   credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers, { getState, endpoint }) => {
     const state = getState() as RootState;
     const { user } = state.auth;
-    if (user?.accessToken) {
+    if (user?.accessToken && endpoint.endsWith('P')) {
       headers.set('authorization', user?.accessToken);
     }
     return headers;
@@ -30,9 +30,7 @@ export const baseQueryWithReAuth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
-  // const result = await baseQuery(args, api, extraOptions);
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === 403) {
     if (!mutex.isLocked()) {
@@ -44,19 +42,15 @@ export const baseQueryWithReAuth: BaseQueryFn<
           api,
           extraOptions
         );
-
         if (refreshResult.data) {
-          // Retry the initial query
           result = await baseQuery(args, api, extraOptions);
         } else {
           api.dispatch(logOut());
         }
       } finally {
-        // release must be called once the mutex should be released again.
         release();
       }
     } else {
-      // wait until the mutex is available without locking it
       await mutex.waitForUnlock();
       result = await baseQuery(args, api, extraOptions);
     }

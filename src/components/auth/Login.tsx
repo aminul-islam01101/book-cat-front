@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { TLogin, loginSchema } from '@/types/authTypes';
