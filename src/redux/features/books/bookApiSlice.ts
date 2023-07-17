@@ -18,6 +18,7 @@ export const authApiSlice = privateApiSlice.injectEndpoints({
     }),
     getBook: builder.query({
       query: (bookId: string) => `/books/${bookId}`,
+      providesTags: ['reviews'],
     }),
   }),
 });

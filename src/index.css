@@ -73,9 +73,9 @@
     @apply outline-none;
   }
 
-  body {
+  /* body {
     overflow-y: hidden;
-  }
+  } */
   /* .large-date-picker .react-datepicker-popper {
 font-size: 20px;
 width: 200px;

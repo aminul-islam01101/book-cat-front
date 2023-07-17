@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { baseQueryWithReAuth } from './baseQueryWithReAuth';
 
-const tags: [string] | [] = [];
+const tags: [string] | [] = ['reviews'];
 export const privateApiSlice = createApi({
   reducerPath: 'publicApi',
   baseQuery: baseQueryWithReAuth,

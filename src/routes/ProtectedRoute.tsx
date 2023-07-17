@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: TProps) => {
   const { user } = useAppSelector((state) => state.auth);
   const { isLoading, isFetching } = authApiSlice.endpoints.getMeP.useQuery(null, {
     skip: false,
-    refetchOnMountOrArgChange: true,
+    // refetchOnMountOrArgChange: true,
   });
 
   const loading = isLoading || isFetching;

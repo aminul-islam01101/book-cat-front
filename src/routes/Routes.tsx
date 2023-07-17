@@ -4,7 +4,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 
 import { AddBooks } from '@/pages/addBooks/AddBooks';
-import BookDetails from '@/pages/allBooks/BookDetails';
+import BookDetails from '@/pages/bookDetails/BookDetails';
 import Books from '@/pages/allBooks/Books';
 import Login from '@/pages/auth/Login';
 import SignUp from '@/pages/auth/SignUp';

@@ -2,7 +2,7 @@ export type TReview = {
   reviewer: string;
   description: string;
   profileImage: string;
-  timeStamp: Date;
+  createdAt: Date;
 };
 
 export type TBookQueryResponse = {
