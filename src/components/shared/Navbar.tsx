@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleLogOut = async () => {
     await logOut(undefined);
   };
-  const active = 'bg-primary hover:bg-secondary  text-white px-4 py-2 rounded';
+  const active = 'bg-primary hover:bg-secondary  text-white px-4 py-1 rounded';
   const inactive = 'bg-transparent text-white hover:text-gray-300';
 
   return (
@@ -26,6 +26,11 @@ const Navbar = () => {
             </div>
           </Link>
           <div className="flex items-center space-x-4">
+            {user?.email && (
+              <NavLink to="/add-book" className={({ isActive }) => (isActive ? active : inactive)}>
+                Add Books
+              </NavLink>
+            )}
             <NavLink to="/all-books" className={({ isActive }) => (isActive ? active : inactive)}>
               All Books
             </NavLink>
@@ -42,7 +47,7 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={handleLogOut}
-                className="bg-secondary hover:bg-secondary  text-white px-4 py-2 rounded"
+                className="bg-secondary hover:bg-secondary  text-white px-4 py-1 rounded"
               >
                 LogOut
               </button>
