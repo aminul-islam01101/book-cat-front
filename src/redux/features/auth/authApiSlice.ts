@@ -3,7 +3,7 @@ import { setUser } from './authSlice';
 import { privateApiSlice } from '@/redux/api/apiSlice';
 import { TGenericResponse, TLogin, TLoginResponse, TSignUp } from '@/types/authTypes';
 
-export const authApi = privateApiSlice.injectEndpoints({
+export const authApiSlice = privateApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMeP: builder.query({
       query() {
@@ -72,4 +72,5 @@ export const authApi = privateApiSlice.injectEndpoints({
     }),
   }),
 });
-export const { useSignUpMutation, useLoginMutation, useGetMePQuery, useLogOutMutation } = authApi;
+export const { useSignUpMutation, useLoginMutation, useGetMePQuery, useLogOutMutation } =
+  authApiSlice;

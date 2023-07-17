@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useLoginMutation } from '@/redux/features/auth/authApi';
+import { useLoginMutation } from '@/redux/features/auth/authApiSlice';
 import { TLogin, loginSchema } from '@/types/authTypes';
 import { TErrorData } from '@/types/globalTypes';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetMePQuery } from '@/redux/features/auth/authApi';
+import { useGetMePQuery } from '@/redux/features/auth/authApiSlice';
 import { useAppSelector } from '@/redux/hooks';
 
 type IAuthMiddleware = {

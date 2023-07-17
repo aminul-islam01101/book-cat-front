@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import logo from '../../assets/images/shared/logo.png';
 
-import { useLogOutMutation } from '@/redux/features/auth/authApi';
+import { useLogOutMutation } from '@/redux/features/auth/authApiSlice';
 import { useAppSelector } from '@/redux/hooks';
 
 const Navbar = () => {
@@ -12,6 +12,8 @@ const Navbar = () => {
   const handleLogOut = async () => {
     await logOut(undefined);
   };
+  const active = 'bg-primary hover:bg-secondary  text-white px-4 py-2 rounded';
+  const inactive = 'bg-transparent text-white hover:text-gray-300';
 
   return (
     <nav className="shadow-custom fixed top-0 left-0 right-0  z-50 p-4 bg-gray-900 text-white">
@@ -24,23 +26,23 @@ const Navbar = () => {
             </div>
           </Link>
           <div className="flex items-center space-x-4">
+            <NavLink to="/all-books" className={({ isActive }) => (isActive ? active : inactive)}>
+              All Books
+            </NavLink>
             {!user?.email ? (
               <>
-                <Link to="/sign-up" className="bg-transparent text-white hover:text-gray-300">
+                <NavLink to="/sign-up" className={({ isActive }) => (isActive ? active : inactive)}>
                   Sign Up
-                </Link>
-                <Link
-                  to="/login"
-                  className="bg-primary hover:bg-secondary 00 text-white px-4 py-2 rounded"
-                >
+                </NavLink>
+                <NavLink to="/login" className={({ isActive }) => (isActive ? active : inactive)}>
                   Login
-                </Link>
+                </NavLink>
               </>
             ) : (
               <button
                 type="button"
                 onClick={handleLogOut}
-                className="bg-primary hover:bg-secondary 00 text-white px-4 py-2 rounded"
+                className="bg-secondary hover:bg-secondary  text-white px-4 py-2 rounded"
               >
                 LogOut
               </button>

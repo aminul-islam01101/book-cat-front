@@ -13,6 +13,7 @@ export type TGenericResponse = {
   statusCode: number;
   success: boolean;
   message: string;
+  meta?: object;
 };
 export type TRtkResponse = TGenericResponse & {
   meta: object | undefined;
