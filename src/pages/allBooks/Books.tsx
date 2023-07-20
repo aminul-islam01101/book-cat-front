@@ -1,20 +1,27 @@
+import { useEffect } from 'react';
+
 import AllBooksLanding from './AllBooksLanding';
 import BookListCard from './BookListCard';
 
 import BookListLoader from '@/components/shared/Loader/BookListLoader';
 import { useGetBooksQuery } from '@/redux/features/books/bookApiSlice';
-import { useAppSelector } from '@/redux/hooks';
+import { setLimitAndOrder } from '@/redux/features/filters/bookFilterSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { TGenericResponse } from '@/types/authTypes';
 import { TBookQueryResponse } from '@/types/bookTypes';
 
 const Books = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setLimitAndOrder({ limit: null, sortOrder: '' }));
+  }, [dispatch]);
+
   const { bookFilters } = useAppSelector((state) => state);
   const booksQuery = useGetBooksQuery(bookFilters);
   const { isSuccess, isError, isLoading } = booksQuery;
   const booksData = booksQuery?.data as TGenericResponse;
   const books = booksData?.data as TBookQueryResponse[];
-  console.log('🌼 🔥🔥 file: Books.tsx:14 🔥🔥 Books 🔥🔥 books🌼', books);
-
   let content = null;
   if (isLoading) {
     content = (
@@ -46,7 +53,9 @@ const Books = () => {
   }
   return (
     <AllBooksLanding>
-      <div className="grid grid-cols-4 gap-5 pt-10">{content}</div>
+      <div className="grid justify-center sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 pt-10">
+        {content}
+      </div>
     </AllBooksLanding>
   );
 };

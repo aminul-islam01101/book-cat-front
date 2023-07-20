@@ -1,9 +1,10 @@
 import { ChangeEvent } from 'react';
 
 import { setSearchTerm } from '@/redux/features/filters/bookFilterSlice';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
 const SearchBox = () => {
+  const { searchTerm } = useAppSelector((state) => state.bookFilters);
   const dispatch = useAppDispatch();
   const handleSearchData = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchTerm(e.target.value));
@@ -15,6 +16,7 @@ const SearchBox = () => {
         <input
           type="text"
           onChange={handleSearchData}
+          value={searchTerm || ''}
           className="bg-white text-gray-700 border border-gray-300 rounded-full py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           placeholder="Search"
         />

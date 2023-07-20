@@ -1,13 +1,9 @@
-import { GoArrowBoth } from 'react-icons/go';
+// Footer.js
 
-const Footer = () => {
-  console.log('first');
-  return (
-    <div>
-      footer
-      <GoArrowBoth />
-    </div>
-  );
-};
+const Footer = () => (
+  <footer className="bg-info py-4 text-center ">
+    <p className="text-sm text-gray-400">© 2023 Your Website. All rights reserved.</p>
+  </footer>
+);
 
 export default Footer;

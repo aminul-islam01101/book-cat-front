@@ -17,14 +17,14 @@ const YearFilter: React.FC<TYearsProps> = ({ years }) => {
     }
   };
   return (
-    <div>
-      <div className="mt-1">
-        <h3 className="text-sm">Time Zone</h3>
+    <div className=" border rounded-md p-1 bg-gray-100 shadow-md">
+      <div className="mt-2">
+        <h3 className="text-sm pb-1">Publication Year</h3>
         <Select
           options={years}
           styles={SelectStyles}
           onChange={handleYearChange}
-          placeholder="Select time zone"
+          placeholder="Publication Year"
           classNamePrefix="select2-selection"
           components={{
             DropdownIndicator: () => null,

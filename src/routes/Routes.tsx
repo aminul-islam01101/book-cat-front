@@ -3,13 +3,15 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 
-import { AddBooks } from '@/pages/addBooks/AddBooks';
-import BookDetails from '@/pages/bookDetails/BookDetails';
 import Books from '@/pages/allBooks/Books';
 import Login from '@/pages/auth/Login';
 import SignUp from '@/pages/auth/SignUp';
+import BookDetails from '@/pages/bookDetails/BookDetails';
+import EditBook from '@/pages/editBooks/EditBook';
 import ErrorPage from '@/pages/ErrorPage';
 import Home from '@/pages/Home';
+import AddBookForm from '@/pages/addBooks/AddBookForm';
+import AddBook from '@/pages/addBooks/AddBook';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,7 +25,16 @@ const router = createBrowserRouter(
         path="/add-book"
         element={
           <ProtectedRoute>
-            <AddBooks />
+            <AddBook />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/books/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditBook />
           </ProtectedRoute>
         }
       />

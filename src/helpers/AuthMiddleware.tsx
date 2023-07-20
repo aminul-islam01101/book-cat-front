@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Footer from '@/components/shared/Footer';
+import NavLoad from '@/components/shared/NavLoad';
 import { useGetMePQuery } from '@/redux/features/auth/authApiSlice';
 import { useAppSelector } from '@/redux/hooks';
 
@@ -9,15 +11,9 @@ type IAuthMiddleware = {
 
 const AuthMiddleware: React.FC<IAuthMiddleware> = ({ children }) => {
   const { user } = useAppSelector((state) => state.auth);
-  console.log('🌼 🔥🔥 file: AuthMiddleware.tsx:12 🔥🔥 user🌼', user);
-
   // const { isLoading } = authApi.endpoints.getMeP.useQuery(null, {
   //   skip: !user?.email,
   // });
-  console.log(
-    '🌼 🔥🔥 file: AuthMiddleware.tsx:20 🔥🔥 user?.email===undefined🌼',
-    user?.email === undefined
-  );
   const { isLoading } = useGetMePQuery(null, {
     skip: user?.email !== undefined,
   });
@@ -28,7 +24,21 @@ const AuthMiddleware: React.FC<IAuthMiddleware> = ({ children }) => {
   //   }, [user?.email]);
 
   if (isLoading) {
-    return <div> Loading</div>;
+    return (
+      <div>
+        {' '}
+        <div className=" flex flex-col justify-between min-h-screen">
+          <div className="pt-20">
+            <NavLoad />
+            <div className="container">
+              <div> Loading ......</div>
+            </div>
+          </div>
+
+          <Footer />
+        </div>{' '}
+      </div>
+    );
   }
 
   return children;

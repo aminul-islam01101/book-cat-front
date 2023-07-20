@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleLogOut = async () => {
     await logOut(undefined);
   };
-  const active = 'bg-primary hover:bg-secondary  text-white px-4 py-1 rounded';
+  const active = 'bg-primary/20 hover:bg-secondary/30  text-white px-4 py-1 rounded';
   const inactive = 'bg-transparent text-white hover:text-gray-300';
 
   return (
@@ -47,7 +47,7 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={handleLogOut}
-                className="bg-secondary hover:bg-secondary  text-white px-4 py-1 rounded"
+                className="bg-secondary/10 hover:bg-secondary/10  text-white px-4 py-1 rounded"
               >
                 LogOut
               </button>

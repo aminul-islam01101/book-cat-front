@@ -15,7 +15,9 @@ const Root = () => {
         </div>
       </div>
 
-      <Footer />
+      <div className="pt-10">
+        <Footer />
+      </div>
     </div>
   );
 };

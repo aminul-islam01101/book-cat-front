@@ -10,7 +10,8 @@ export const reviewApiSlice = privateApiSlice.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ['reviews'],
+      invalidatesTags: (result, error, arg) => [{ type: 'review', id: arg.bookId }],
+      // invalidatesTags: (result, error, arg) => [{ type: 'review', id: arg }, 'book']
     }),
   }),
 });
