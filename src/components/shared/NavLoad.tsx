@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import logo from '../../assets/images/shared/logo.png';
 
 const NavLoad = () => (

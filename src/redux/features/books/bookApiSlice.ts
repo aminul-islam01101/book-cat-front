@@ -26,7 +26,7 @@ export const bookApiSlice = privateApiSlice.injectEndpoints({
         method: 'PATCH',
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => ['books', { type: 'book', id: arg.bookId }],
+      invalidatesTags: (_result, _error, arg) => ['books', { type: 'book', id: arg.bookId }],
       // invalidatesTags: ['book'],
     }),
     addBook: builder.mutation({
@@ -35,15 +35,22 @@ export const bookApiSlice = privateApiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: (result, error, arg) => ['books'],
+      invalidatesTags: ['books'],
     }),
     getBook: builder.query({
       query: (bookId: string) => `/books/${bookId}`,
       // providesTags: ['reviews'],
-      providesTags: (result, error, arg) => [
+      providesTags: (_result, _error, arg) => [
         { type: 'review', id: arg },
         { type: 'book', id: arg },
       ],
+    }),
+    deleteBook: builder.mutation({
+      query: (bookId: string) => ({
+        url: `/books/${bookId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['books'],
     }),
   }),
 });
@@ -53,4 +60,5 @@ export const {
   useGetYearGenreQuery,
   useUpdateBookMutation,
   useAddBookMutation,
+  useDeleteBookMutation,
 } = bookApiSlice;

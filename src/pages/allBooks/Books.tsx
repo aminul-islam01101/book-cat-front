@@ -19,7 +19,7 @@ const Books = () => {
 
   const { bookFilters } = useAppSelector((state) => state);
   const booksQuery = useGetBooksQuery(bookFilters);
-  const { isSuccess, isError, isLoading } = booksQuery;
+  const { isError, isLoading } = booksQuery;
   const booksData = booksQuery?.data as TGenericResponse;
   const books = booksData?.data as TBookQueryResponse[];
   let content = null;

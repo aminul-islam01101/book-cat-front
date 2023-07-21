@@ -15,7 +15,7 @@ import { TGenericResponse } from '@/types/authTypes';
 const mutex = new Mutex();
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_APP_SERVER_URL_PRODUCTION as string,
+  baseUrl: import.meta.env.VITE_APP_SERVER_URL as string,
   credentials: 'include',
   prepareHeaders: (headers, { getState, endpoint }) => {
     const state = getState() as RootState;

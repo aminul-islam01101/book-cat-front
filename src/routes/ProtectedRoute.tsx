@@ -13,7 +13,7 @@ type TProps = {
 
 const ProtectedRoute = ({ children }: TProps) => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
+
   const { user } = useAppSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(true);
   const [userP, setUserP] = useState(undefined as TLoginResponse | undefined);

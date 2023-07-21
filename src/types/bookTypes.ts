@@ -42,13 +42,16 @@ export type TBook = {
   publicationYear: string;
   email: string;
 };
+export type TBookOwner = {
+  email: string;
+};
 
 export type TBookQueryResponse = {
   author: string;
   createdAt: string;
   genre: string;
   id: string;
-  owner: string;
+  owner: TBookOwner;
   publicationYear: string;
   publicationMonth: string;
   publicationTime: string;

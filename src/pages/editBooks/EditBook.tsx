@@ -9,7 +9,7 @@ import { TBookQueryResponse } from '@/types/bookTypes';
 const EditBook = () => {
   const { id } = useParams();
   const bookQuery = useGetBookQuery(id as string);
-  const { isLoading, isSuccess, isError } = bookQuery;
+  const { isLoading, isError } = bookQuery;
   const bookData = bookQuery.data as TGenericResponse;
   const book = bookData?.data as TBookQueryResponse;
 
