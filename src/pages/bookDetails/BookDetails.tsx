@@ -41,11 +41,13 @@ const BookDetails = () => {
           </div>
         )}
       </div>
-      <div className="flex   mb-4 gap-4">
-        <WishList bookmark={bookmark} bookId={id as string} /> ||
-        <Reading reading={booksReading} bookId={id as string} /> ||
-        <Read read={booksRead} bookId={id as string} />
-      </div>
+      {user?.email && (
+        <div className="flex   mb-4 gap-4">
+          <WishList bookmark={bookmark} bookId={id as string} /> ||
+          <Reading reading={booksReading} bookId={id as string} /> ||
+          <Read read={booksRead} bookId={id as string} />
+        </div>
+      )}
       <div className="mb-4">
         <p className="font-semibold">Author: {author}</p>
       </div>
