@@ -31,6 +31,9 @@ const filterSlice = createSlice({
     ) => {
       state.limit = action.payload.limit;
       state.sortOrder = action.payload.sortOrder;
+      state.searchTerm = '';
+      state.genre = '';
+      state.publicationYear = '';
     },
     setOrder: (state, action: PayloadAction<string>) => {
       state.sortOrder = action.payload;
