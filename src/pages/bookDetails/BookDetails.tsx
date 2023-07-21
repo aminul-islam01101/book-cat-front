@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 
 import DeleteBook from './DeleteBook';
 import Read from './Read';
-import WishList from './WishList';
 import Reading from './Reading';
+import WishList from './WishList';
 import ReviewCards from './reviews/ReviewCards';
 import ReviewForm from './reviews/ReviewForm';
 
@@ -57,7 +57,7 @@ const BookDetails = () => {
           Publication Date: {publicationMonth}, {publicationYear}
         </p>
       </div>
-      <ReviewForm />
+      {user?.email !== owner?.email && <ReviewForm />}
       <ReviewCards reviews={reviews || []} />
     </div>
   );

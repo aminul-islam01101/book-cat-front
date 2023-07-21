@@ -10,13 +10,9 @@ type WishListProps = {
 };
 
 const WishList: FC<WishListProps> = ({ bookmark, bookId }) => {
-  console.log('🌼 🔥🔥 file: WishList.tsx:13 🔥🔥 bookmark🌼', bookmark);
-
   const { user } = useAppSelector((state) => state.auth);
 
-  const [manipulateFavorites, options] = useManipulateFavoritesMutation();
-  const { isError, error, data } = options;
-  console.log('🌼 🔥🔥 file: WishList.tsx:17 🔥🔥 isSuccess🌼', error);
+  const [manipulateFavorites] = useManipulateFavoritesMutation();
 
   const handleBookmarkRemove = async () => {
     await manipulateFavorites({
