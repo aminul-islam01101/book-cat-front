@@ -8,7 +8,7 @@ import Books from '@/pages/allBooks/Books';
 import Login from '@/pages/auth/Login';
 import SignUp from '@/pages/auth/SignUp';
 import BookDetails from '@/pages/bookDetails/BookDetails';
-import EditBook from '@/pages/editBooks/EditBook';
+import EditBook from '@/pages/editBooks/EditBookPage';
 import ErrorPage from '@/pages/ErrorPage';
 import Home from '@/pages/Home';
 

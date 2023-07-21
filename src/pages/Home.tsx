@@ -21,7 +21,7 @@ const Home = () => {
   console.log('🌼 🔥🔥 file: Home.tsx:18 🔥🔥 Home 🔥🔥 books🌼', books);
 
   useEffect(() => {
-    dispatch(setLimitAndOrder({ limit: 2, sortOrder: 'desc' }));
+    dispatch(setLimitAndOrder({ limit: 10, sortOrder: 'desc' }));
   }, [dispatch]);
 
   let content = null;
@@ -55,7 +55,7 @@ const Home = () => {
   }
   return (
     <div>
-      <div>Recently added 10 Books </div>
+      <div>Recently added Books </div>
       <div className="grid justify-center sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 pt-10">
         {content}
       </div>

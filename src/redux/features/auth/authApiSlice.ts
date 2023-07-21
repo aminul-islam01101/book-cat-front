@@ -23,6 +23,7 @@ export const authApiSlice = privateApiSlice.injectEndpoints({
         }
       },
     }),
+
     signUp: builder.mutation({
       query: (data: TSignUp) => ({
         url: '/auth/signup',

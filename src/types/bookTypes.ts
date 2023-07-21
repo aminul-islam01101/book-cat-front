@@ -87,3 +87,12 @@ export const createBookZodSchema = z.object({
     }),
   }),
 });
+export type TFavorites = {
+  bookId: string;
+  type: string;
+};
+export type TReaderResponse = {
+  bookmark: string[];
+  booksRead: string[];
+  booksReading: string[];
+};
